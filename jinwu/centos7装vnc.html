@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>centos7安装vncserver</title>
+<head>
+<body>
+<pre>
+centos7安装vncserver
+
+一服务端
+
+安装VNCServer
+
+#yum -y install vnc *vnc-server*
+
+设置密码
+
+# vncserver
+
+You will require a password to access your desktops.
+
+Password: 123456            #输入vnc 连接密码
+
+Verify: 123456                 #确认vnc密码
+
+xauth: creating new authority file /root/.Xauthority
+
+New ‘localhost.localdomain:1 (root)’ desktop is localhost.localdomain:1
+
+Creating default startup script /root/.vnc/xstartup
+Starting applications specified in /root/.vnc/xstartup
+Log file is /root/.vnc/localhost.localdomain:1.log
+
+启动服务
+
+启动一个窗口，如1号窗口
+
+# vncserver :1
+
+停止服务
+[root@iZ23zjkwlj8Z ~]# vncserver -kill :1
+Killing Xvnc process ID 1661
+
+
+
+
+-------------------------------------------------------------
+从鸟哥那边学来的安装vncserver
+
+yum install tigervnc-server
+
+启动vncserver ：vncserver :5	#启动5号窗口
+</pre>
+<body>
+</html>

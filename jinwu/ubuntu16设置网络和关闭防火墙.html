@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ubuntu16 网络设置静态ip</title>
+</head>
+<body>
+<pre>
+
+
+
+	ubuntu16 网络设置静态ip
+
+	在编辑/etc/network/interface  文件
+	vi /etc/network/interface
+
+	auto lo
+	iface lo inet loopback
+	#上面的lo是原来就有的，添加下面内容
+	auto ens3
+	iface ens3 inet static
+	address 192.168.12.147
+	netmask 255.255.255.0
+	gateway 192.168.12.2
+	dns-nameserver 192.168.211.103
+
+
+	重启网络
+		service networking restart
+		
+	已经可以上网了
+
+	关闭防火墙
+
+	ufw	disable
+
+	#开启防火墙是 ufw enable
+
+
+
+
+
+</pre>
+</body>
+</html>

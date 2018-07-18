@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>suse12.1 设置网络</title>
+</head>
+<body>
+<pre>
+	suse12.1 设置网络
+
+
+	ifconfig	#发现只有lo,没有其他的网卡
+
+	ip add		#看见有个eth0没有启动
+
+	ifconfig eth0 up	#开启eth0
+
+
+	修改网络配置文件
+
+	 cd /etc/sysconfig/network/
+	 
+	 #发现没有ifcfg-eth0  有个ifcfg-lo  
+	 
+	 cp ifcfg-lo ifcfg-eth0		#复制一下
+	 
+	 vi ifcfg-eth0	#修改配置eth0的文件
+	 
+	 内容如下：
+	 #---------------------------------------------------
+	 
+	IPADDR=192.168.12.147
+	NETMASK=255.255.255.0
+	NETWORK=192.168.12.0
+	BROADCAST=192.168.12.255
+	STARTMODE=auto
+	BOOTPROTO=static
+	USERCONTROL=no
+	FIREWALL=no
+
+	#-------------------------------------------------------
+
+
+	ip这是好了，还有DNS和路由
+
+
+	添加DNS
+
+	vi /etc/resolv.conf	#末尾添加
+
+	nameserver 192.168.211.103
+
+
+
+	添加路由
+	在/etc/sysconfig/network/ 下查看是否有routes文件
+
+	没有则新建一个，我的是没有的
+
+	vi routes #添加如下内容
+	default 192.168.12.2 - -
+
+
+	重启网络
+
+	service network restart		#到此可以连上网了
+
+	最后修改一下主机名：
+	vi /etc/hostname
+	test	#修改主机名为test
+
+
+	昨天做到这里时还是不行，后面发现是我这里是kvm上的虚拟机，NIC应该是桥接才对，改过来，再重启一下网络就ok了
+
+
+	现在ssh还连不上，需要关一下防火墙
+	systemctl stop SuSEfirewall2.service	#关闭
+	systemctl disable SuSEfirewall2.service	#设置开机不自动启动
+
+	
+</pre>
+</body>
+<html>
